@@ -16,7 +16,7 @@ private:
     int width;
     int height;
     int maxColor;
-    std::vector<std::vector<std::vector<int>>> imageData;
+    std::vector<std::vector<int>> imageData;
 
 public:
     // Konstruktor klasy PPMReader
@@ -26,10 +26,10 @@ public:
     void printImageInfo() override;
     void printMostFrequentColor() override;
     int calcualteNumberOfUniqueColors() override;
-    void printImageData() override;
+    
 
     // Metoda do znajdowania najczęściej występującego koloru
-    std::vector<std::vector<int>> getMostFrequentColors();
+    int getMostFrequentColors();
    
 };
 
