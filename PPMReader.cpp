@@ -94,7 +94,7 @@ void PPMReader::printMostFrequentColor()
     cout << "Najczestszy kolor: " << mostFrequentColor << "\n";
 }
 
-int PPMReader::calcualteNumberOfUniqueColors() 
+int PPMReader::calculateNumberOfUniqueColors()
 {
     set<int> uniqueColors;
     for (int y = 0; y < height; ++y) 
