@@ -20,7 +20,7 @@ public:
     void printImageInfo() override;
     void printMostFrequentColor() override;
     int calcualteNumberOfUniqueColors() override;
-    void printImageData() override;
+    
 
     std::pair<int, int> getMostFrequentColor();
 };
