@@ -19,7 +19,7 @@ public:
     PGMReader(std::string imagePath);
     void printImageInfo() override;
     void printMostFrequentColor() override;
-    int calcualteNumberOfUniqueColors() override;
+    int calculateNumberOfUniqueColors() override;
     
 
     std::pair<int, int> getMostFrequentColor();
