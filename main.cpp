@@ -14,7 +14,7 @@ int main() {
     p.printMostFrequentColor();
 
     // Obliczenie i wyświetlenie liczby unikalnych kolorów
-    int uniqueColors = p.calcualteNumberOfUniqueColors();
+    int uniqueColors = p.calculateNumberOfUniqueColors();
     cout << "Liczba unikalnych kolorow w obrazie PGM: " << uniqueColors << endl;
 
     cout << "\n";
@@ -29,7 +29,7 @@ int main() {
     b.printMostFrequentColor();
 
     // Obliczenie i wyświetlenie liczby unikalnych kolorów w obrazie PPM
-    int uniqueColorsPPM = b.calcualteNumberOfUniqueColors();
+    int uniqueColorsPPM = b.calculateNumberOfUniqueColors();
     cout << "Liczba unikalnych kolorow w obrazie PPM: " << uniqueColorsPPM << endl;
 
     return 0;
