@@ -60,7 +60,7 @@ PGMReader::PGMReader(string imagePath) : width(0), height(0)
 void PGMReader::printImageInfo() 
 {
     cout << "Rozmiar obrazu: " << width << "x" << height << "\n";
-    cout << "Unikalnych kolorow: " << calcualteNumberOfUniqueColors() << "\n";
+    cout << "Unikalnych kolorow: " << calculateNumberOfUniqueColors() << "\n";
     printMostFrequentColor();
 
     // Wyświetlanie unikalnych kolorów
@@ -79,7 +79,7 @@ void PGMReader::printMostFrequentColor()
     cout << "Najczestszy kolor: " << mostFrequentColor.first << " (Ile razy: " << mostFrequentColor.second << ")\n";
 }
 
-int PGMReader::calcualteNumberOfUniqueColors() 
+int PGMReader::calculateNumberOfUniqueColors()
 {
     set<int> uniqueColors(imageData.begin(), imageData.end());
     return uniqueColors.size();
