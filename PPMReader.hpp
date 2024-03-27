@@ -25,7 +25,7 @@ public:
     // Metody wirtualne dziedziczone po ImageReader
     void printImageInfo() override;
     void printMostFrequentColor() override;
-    int calcualteNumberOfUniqueColors() override;
+    int calculateNumberOfUniqueColors() override;
     
 
     // Metoda do znajdowania najczęściej występującego koloru
