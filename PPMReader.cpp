@@ -68,69 +68,56 @@ PPMReader::PPMReader(string imagePath) : width(0), height(0), maxColor(0)
 void PPMReader::printImageInfo() {
     cout << "Rozmiar obrazu: " << width << "x" << height << "\n";
     cout << "Maksymalna wartosc koloru: " << maxColor << "\n";
-   
+
     printMostFrequentColor();
 
-    // Wyświetlanie unikalnych kolorów
-    set<int> uniqueColors;
-    for (int y = 0; y < height; ++y) 
-    {
-        for (int x = 0; x < width * 3; ++x) 
-        {
-            uniqueColors.insert(imageData[y][x]);
+    // Wyświetlanie unikalnych kolorów w formie RGB
+    set<vector<int>> uniqueColors;
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width * 3; x += 3) {
+            vector<int> color = { imageData[y][x], imageData[y][x + 1], imageData[y][x + 2] };
+            uniqueColors.insert(color);
         }
     }
     cout << "Unikalne kolory:";
-    for (int color : uniqueColors) 
-    {
-        cout << " " << color;
+    for (const auto& color : uniqueColors) {
+        cout << " (" << color[0] << ", " << color[1] << ", " << color[2] << ")";
     }
     cout << "\n";
 }
 
-void PPMReader::printMostFrequentColor() 
-{
-    auto mostFrequentColor = getMostFrequentColors();
-    cout << "Najczestszy kolor: " << mostFrequentColor << "\n";
+void PPMReader::printMostFrequentColor() {
+    map<vector<int>, int> colorFrequency;
+
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width * 3; x += 3) {
+            vector<int> color = { imageData[y][x], imageData[y][x + 1], imageData[y][x + 2] };
+            colorFrequency[color]++;
+        }
+    }
+
+    auto mostFrequent = std::max_element(colorFrequency.begin(), colorFrequency.end(), [](const auto& a, const auto& b) {
+        return a.second < b.second;
+        });
+
+    if (mostFrequent != colorFrequency.end()) {
+        cout << "Najczestszy kolor: (R=" << mostFrequent->first[0]
+            << ", G=" << mostFrequent->first[1]
+            << ", B=" << mostFrequent->first[2]
+            << ") (ile razy wystapil: " << mostFrequent->second << ")\n";
+    }
+    else {
+        cout << "Brak kolorów.\n";
+    }
 }
 
-int PPMReader::calculateNumberOfUniqueColors()
-{
-    set<int> uniqueColors;
-    for (int y = 0; y < height; ++y) 
-    {
-        for (int x = 0; x < width * 3; ++x) 
-        {
-            uniqueColors.insert(imageData[y][x]);
+int PPMReader::calculateNumberOfUniqueColors() {
+    set<vector<int>> uniqueColors;
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width * 3; x += 3) {
+            vector<int> color = { imageData[y][x], imageData[y][x + 1], imageData[y][x + 2] };
+            uniqueColors.insert(color);
         }
     }
     return uniqueColors.size();
-}
-
-int PPMReader::getMostFrequentColors()
-{
-    map<int, int> colorFrequency;
-
-    // Obliczanie częstości występowania kolorów
-    for (int y = 0; y < height; ++y) 
-    {
-        for (int x = 0; x < width * 3; ++x) 
-        {
-            colorFrequency[imageData[y][x]]++;
-        }
-    }
-
-    // Znalezienie koloru o najwyższej częstości
-    int maxFrequency = 0;
-    int mostFrequentColor = 0;
-    for (const auto& pair : colorFrequency)
-    {
-        if (pair.second > maxFrequency) 
-        {
-            maxFrequency = pair.second;
-            mostFrequentColor = pair.first;
-        }
-    }
-
-    return mostFrequentColor;
 }
